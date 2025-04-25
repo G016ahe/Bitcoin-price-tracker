@@ -1,13 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Bitcoin Price</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Bitcoin Price Tracker</title>
 </head>
 <body>
-  <h1>Bitcoin Price</h1>
-  <p id="price">Loading...</p>
+  <h1>Bitcoin Price:</h1>
+  <div id="price">Loading...</div>
 
-  <script src="script.js"></script>
+  <script>
+    const priceElement = document.getElementById("price");
+
+    fetch("https://api.coindesk.com/v1/bpi/currentprice/BTC.json")
+      .then(response => response.json())
+      .then(data => {
+        const price = data.bpi.USD.rate;
+        priceElement.innerText = `$${price}`;
+      })
+      .catch(error => {
+        priceElement.innerText = "Error loading price";
+        console.error("Fetch error:", error);
+      });
+  </script>
 </body>
 </html>
