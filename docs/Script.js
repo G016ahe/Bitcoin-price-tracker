@@ -1,13 +1,16 @@
-const priceElement = document.getElementById("price");
+// script.js
+document.addEventListener("DOMContentLoaded", function () {
+  const priceElement = document.getElementById("price");
 
-fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd")
-  .then(response => response.json())
-  .then(data => {
-    const price = data.bitcoin.usd;
-    priceElement.innerText = `$${price}`;
-  })
-  .catch(error => {
-    priceElement.innerText = "Error loading price";
-    console.error("Fetch error:", error);
-  });
+  fetch("https://api.coindesk.com/v1/bpi/currentprice/BTC.json")
+    .then(response => response.json())
+    .then(data => {
+      const price = data.bpi.USD.rate;
+      priceElement.innerText = `$${price}`;
+    })
+    .catch(error => {
+      priceElement.innerText = "Error loading price";
+      console.error("Fetch error:", error);
+    });
+});
 
