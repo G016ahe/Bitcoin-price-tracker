@@ -4,9 +4,10 @@ fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=u
   .then(response => response.json())
   .then(data => {
     const price = data.bitcoin.usd;
-    priceElement.textContent = "$" + price;
+    priceElement.innerText = `$${price}`;
   })
   .catch(error => {
-    priceElement.textContent = "Error loading price";
-    console.error(error);
+    priceElement.innerText = "Error loading price";
+    console.error("Fetch error:", error);
   });
+
